@@ -6,8 +6,6 @@ Group: Applications/Internet
 License: GPLv2+
 URL:  http://traceroute.sourceforge.net
 Source0: http://dl.sourceforge.net/traceroute/traceroute-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 
 %description
 The traceroute utility displays the route used by IP packets on their
@@ -20,40 +18,29 @@ show you where the trouble is coming from along the route.
 Install traceroute if you need a tool for diagnosing network connectivity
 problems.
 
-
 %prep
 %setup -q
-
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS=""
 
-
 %install
-rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/bin
 install -m755 traceroute/traceroute $RPM_BUILD_ROOT/bin
-pushd $RPM_BUILD_ROOT/bin
-ln -s traceroute traceroute6
-popd
+ln -sr $RPM_BUILD_ROOT/bin/traceroute $RPM_BUILD_ROOT/bin/traceroute6
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man8
 install -p -m644 traceroute/traceroute.8 $RPM_BUILD_ROOT%{_mandir}/man8
 ln -s traceroute.8 $RPM_BUILD_ROOT%{_mandir}/man8/traceroute6.8
 
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %files
-%defattr(-,root,root,-)
 %doc COPYING README TODO CREDITS
 /bin/*
 %{_mandir}/*/*
 
-
 %changelog
+* Fri Apr 26 2024 Thierry Escande <thierry.escande@vates.tech> - 2.1.5-1
+- Imported from upstream version 2.1.5
+
 * Tue Oct 20 2006 Dmitry Butskoy <Dmitry@Butskoy.name> - 2.0.2-1
 - initial release
