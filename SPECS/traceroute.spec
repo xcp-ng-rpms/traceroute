@@ -7,6 +7,8 @@ License: GPLv2+
 URL:  http://traceroute.sourceforge.net
 Source0: http://dl.sourceforge.net/traceroute/traceroute-%{version}.tar.gz
 
+BuildRequires: gcc
+
 %description
 The traceroute utility displays the route used by IP packets on their
 way to a specified network (or Internet) host.  Traceroute displays
@@ -41,6 +43,3 @@ ln -s traceroute.8 $RPM_BUILD_ROOT%{_mandir}/man8/traceroute6.8
 %changelog
 * Fri Apr 26 2024 Thierry Escande <thierry.escande@vates.tech> - 2.1.5-1
 - Imported from upstream version 2.1.5
-
-* Tue Oct 20 2006 Dmitry Butskoy <Dmitry@Butskoy.name> - 2.0.2-1
-- initial release
