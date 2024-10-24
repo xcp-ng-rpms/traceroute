@@ -27,9 +27,9 @@ problems.
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS=""
 
 %install
-install -d $RPM_BUILD_ROOT/bin
-install -m755 traceroute/traceroute $RPM_BUILD_ROOT/bin
-ln -sr $RPM_BUILD_ROOT/bin/traceroute $RPM_BUILD_ROOT/bin/traceroute6
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -m755 traceroute/traceroute $RPM_BUILD_ROOT%{_bindir}
+ln -sr $RPM_BUILD_ROOT/bin/traceroute $RPM_BUILD_ROOT%{_bindir}/traceroute6
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man8
 install -p -m644 traceroute/traceroute.8 $RPM_BUILD_ROOT%{_mandir}/man8
@@ -37,7 +37,7 @@ ln -s traceroute.8 $RPM_BUILD_ROOT%{_mandir}/man8/traceroute6.8
 
 %files
 %doc COPYING README TODO CREDITS
-/bin/*
+%{_bindir}/*
 %{_mandir}/*/*
 
 %changelog
